@@ -16,6 +16,7 @@ $entryForm.addEventListener('submit', function (event) {
   var $title = $entryForm.elements['picture-title'].value;
   var $url = $entryForm.elements['photo-url'].value;
   var $notes = $entryForm.elements.notes.value;
+
   var entryForm = {
     title: $title,
     url: $url,
@@ -23,6 +24,7 @@ $entryForm.addEventListener('submit', function (event) {
     nextEntryId: data.nextEntryId,
     entryId: entryId
   };
+
   entryId++;
   data.entries.push(entryForm);
   data.nextEntryId++;
