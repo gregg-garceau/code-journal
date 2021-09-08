@@ -9,6 +9,7 @@ $urlInput.addEventListener('input', function (event) {
 });
 
 var $entryForm = document.querySelector('.entry-form');
+var entryId = 0;
 
 $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -19,8 +20,10 @@ $entryForm.addEventListener('submit', function (event) {
     title: $title,
     url: $url,
     notes: $notes,
-    nextEntryId: data.nextEntryId
+    nextEntryId: data.nextEntryId,
+    entryId: entryId
   };
+  entryId++;
   data.entries.push(entryForm);
   data.nextEntryId++;
   $userPhoto.src = 'images/placeholder-image-square.jpg';
