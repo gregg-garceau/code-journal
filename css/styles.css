@@ -7,6 +7,10 @@ body {
   margin-bottom: 1rem;
 }
 
+ul {
+  padding: 0;
+}
+
 header {
   background-color: rgb(85, 43, 129);
 }
@@ -53,9 +57,21 @@ button {
 
 .journal-header {
   color: white;
+  display: inline-block;
+  margin-right: 1rem;
 }
 
 .flex-end {
   display: flex;
   justify-content: flex-end;
+}
+
+.margin-top-zero {
+  margin-top: 0;
+}
+
+.flex-spaced {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
