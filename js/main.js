@@ -17,8 +17,6 @@ var dataEntryId = 0;
 function renderEntries(entry) {
   var entryListItem = document.createElement('li');
   entryListItem.setAttribute('class', 'row');
-  entryListItem.setAttribute('data-entry-id', data.entries[dataEntryId].entryId);
-  dataEntryId++;
 
   var entryImage = document.createElement('img');
   entryImage.setAttribute('class', 'column-half');
@@ -37,6 +35,8 @@ function renderEntries(entry) {
 
   var penIcon = document.createElement('i');
   penIcon.setAttribute('class', 'fas fa-pen');
+  penIcon.setAttribute('data-entry-id', data.entries[dataEntryId].entryId);
+  dataEntryId++;
   entryTitle.appendChild(penIcon);
 
   var entryNotes = document.createElement('p');
@@ -47,7 +47,6 @@ function renderEntries(entry) {
 }
 
 var $entryForm = document.querySelector('.entry-form');
-var entryId = 0;
 
 $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -60,10 +59,9 @@ $entryForm.addEventListener('submit', function (event) {
     url: $url,
     notes: $notes,
     nextEntryId: data.nextEntryId,
-    entryId: entryId
+    entryId: data.nextEntryId - 1
   };
 
-  entryId++;
   data.entries.push(entryForm);
   data.nextEntryId++;
   $userPhoto.src = 'images/placeholder-image-square.jpg';
@@ -83,16 +81,21 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var entryReturn = renderEntries(data.entries[i]);
     $unorderedList.appendChild(entryReturn);
   }
-  var $icon = document.querySelectorAll('.fas');
+
   $unorderedList.addEventListener('click', function (event) {
-    var count = 0;
-    while (count < $icon.length) {
-      if (event.target === $icon[count]) {
-        $dataViewEntries.className = 'hidden';
-        $dataViewForm.className = 'view';
-        break;
-      } else {
-        count++;
+    if (event.target.getAttribute('data-entry-id')) {
+      $dataViewEntries.className = 'hidden';
+      $dataViewForm.className = 'view';
+      var iconTarget = event.target.getAttribute('data-entry-id');
+      iconTarget = parseInt(iconTarget);
+      for (let b = 0; b < data.entries.length; b++) {
+        if (iconTarget === data.entries[b].entryId) {
+          data.editing = data.entries[b];
+          data.view = 'entry-form';
+          $dataViewEntries.className = 'hidden';
+          $dataViewForm.className = 'view';
+          location.reload();
+        }
       }
     }
   });
