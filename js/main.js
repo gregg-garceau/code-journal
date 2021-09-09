@@ -13,7 +13,6 @@ $urlInput.addEventListener('input', function (event) {
   $userPhoto.src = imageUrl;
 });
 
-var dataEntryId = 0;
 function renderEntries(entry) {
   var entryListItem = document.createElement('li');
   entryListItem.setAttribute('class', 'row');
@@ -35,8 +34,7 @@ function renderEntries(entry) {
 
   var penIcon = document.createElement('i');
   penIcon.setAttribute('class', 'fas fa-pen');
-  penIcon.setAttribute('data-entry-id', data.entries[dataEntryId].entryId);
-  dataEntryId++;
+  penIcon.setAttribute('data-entry-id', entry.entryId);
   entryTitle.appendChild(penIcon);
 
   var entryNotes = document.createElement('p');
@@ -62,7 +60,13 @@ $entryForm.addEventListener('submit', function (event) {
         editedEntry.url = $url;
         editedEntry.notes = $notes;
         data.entries.splice(z, 1, editedEntry);
+        $unorderedList.innerHTML = '';
       }
+    }
+    for (let x = 0; x < data.entries.length; x++) {
+      var render = renderEntries(data.entries[x]);
+      $unorderedList.appendChild(render);
+      data.view = 'entries';
     }
   } else {
     var entryForm = {
@@ -85,7 +89,6 @@ $entryForm.addEventListener('submit', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
-  location.reload();
 });
 
 document.addEventListener('DOMContentLoaded', function (event) {
