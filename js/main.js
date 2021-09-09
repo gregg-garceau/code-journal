@@ -13,9 +13,12 @@ $urlInput.addEventListener('input', function (event) {
   $userPhoto.src = imageUrl;
 });
 
+var dataEntryId = 0;
 function renderEntries(entry) {
   var entryListItem = document.createElement('li');
   entryListItem.setAttribute('class', 'row');
+  entryListItem.setAttribute('data-entry-id', data.entries[dataEntryId].entryId);
+  dataEntryId++;
 
   var entryImage = document.createElement('img');
   entryImage.setAttribute('class', 'column-half');
@@ -80,8 +83,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var entryReturn = renderEntries(data.entries[i]);
     $unorderedList.appendChild(entryReturn);
   }
+  var $icon = document.querySelectorAll('.fas');
+  $unorderedList.addEventListener('click', function (event) {
+    var count = 0;
+    while (count < $icon.length) {
+      if (event.target === $icon[count]) {
+        $dataViewEntries.className = 'hidden';
+        $dataViewForm.className = 'view';
+        break;
+      } else {
+        count++;
+      }
+    }
+  });
 });
-
 $entriesNav.addEventListener('click', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
