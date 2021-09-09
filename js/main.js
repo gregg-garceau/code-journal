@@ -27,10 +27,14 @@ function renderEntries(entry) {
   textDiv.setAttribute('class', 'column-half');
   entryListItem.appendChild(textDiv);
 
-  var entryTitle = document.createElement('h3');
+  var entryTitle = document.createElement('h2');
   entryTitle.setAttribute('class', 'margin-top-zero');
   entryTitle.textContent = entry.title;
   textDiv.appendChild(entryTitle);
+
+  var penIcon = document.createElement('i');
+  penIcon.setAttribute('class', 'fas fa-pen');
+  entryTitle.appendChild(penIcon);
 
   var entryNotes = document.createElement('p');
   entryNotes.textContent = entry.notes;

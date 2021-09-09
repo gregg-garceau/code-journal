@@ -68,10 +68,16 @@ button {
 
 .margin-top-zero {
   margin-top: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .flex-spaced {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fas {
+  color: rgb(85, 43, 129);
 }
