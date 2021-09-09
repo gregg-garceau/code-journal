@@ -7,6 +7,7 @@ var $dataViewEntries = document.querySelector('[data-view="entries"]');
 var $entriesNav = document.querySelector('h3.journal-header');
 var $newButton = document.querySelector('.new-entry');
 var $unorderedList = document.querySelector('.entries-list');
+var $deleteLink = document.querySelector('.delete');
 
 $urlInput.addEventListener('input', function (event) {
   var imageUrl = $urlInput.value;
@@ -67,6 +68,8 @@ $entryForm.addEventListener('submit', function (event) {
       var render = renderEntries(data.entries[x]);
       $unorderedList.appendChild(render);
       data.view = 'entries';
+      $entryForm.reset();
+      $userPhoto.src = 'images/placeholder-image-square.jpg';
     }
   } else {
     var entryForm = {
@@ -86,6 +89,7 @@ $entryForm.addEventListener('submit', function (event) {
     $unorderedList.prepend(prependEntry);
   }
   data.editing = null;
+  $deleteLink.classList.add('hidden');
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
@@ -99,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   $unorderedList.addEventListener('click', function (event) {
     if (event.target.getAttribute('data-entry-id')) {
+      $deleteLink.classList.remove('hidden');
       $dataViewEntries.className = 'hidden';
       $dataViewForm.className = 'view';
       var iconTarget = event.target.getAttribute('data-entry-id');
@@ -122,6 +127,8 @@ $entriesNav.addEventListener('click', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
+  $entryForm.reset();
+  $userPhoto.src = 'images/placeholder-image-square.jpg';
 });
 
 $newButton.addEventListener('click', function (event) {

@@ -61,11 +61,6 @@ button {
   margin-right: 1rem;
 }
 
-.flex-end {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .margin-top-zero {
   margin-top: 0;
   display: flex;
@@ -80,4 +75,22 @@ button {
 
 .fas {
   color: rgb(85, 43, 129);
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+button.absolute {
+  bottom: -20px;
+  right: 10px;
+}
+
+a.absolute {
+  left: 10px;
+  bottom: -10px;
 }
