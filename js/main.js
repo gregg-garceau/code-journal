@@ -94,7 +94,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
           data.view = 'entry-form';
           $dataViewEntries.className = 'hidden';
           $dataViewForm.className = 'view';
-          location.reload();
+          document.querySelector('.user-photo').src = data.editing.url;
+          document.querySelector('.picture-title').value = data.editing.title;
+          document.querySelector('.photo-url').value = data.editing.url;
+          document.querySelector('.user-notes').value = data.editing.notes;
         }
       }
     }
