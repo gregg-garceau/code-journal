@@ -144,3 +144,38 @@ if (data.view === 'entry-form') {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
 }
+
+var $modalBox = document.querySelector('.modal-box');
+var $cancelButton = document.querySelector('.cancel-button');
+var $confirmButton = document.querySelector('.confirm-button');
+
+$deleteLink.addEventListener('click', function (event) {
+  $modalBox.classList.remove('hidden');
+});
+
+$cancelButton.addEventListener('click', function (event) {
+  $modalBox.classList.add('hidden');
+});
+
+$confirmButton.addEventListener('click', function (event) {
+  $modalBox.classList.add('hidden');
+  data.view = 'entries';
+  $dataViewEntries.className = 'view';
+  $dataViewForm.className = 'hidden';
+  var deleteId = data.editing.entryId;
+  for (let y = 0; y < data.entries.length; y++) {
+    if (data.entries[y].entryId === deleteId) {
+      var deleteIndex = y;
+      data.entries.splice(deleteIndex, 1);
+      $unorderedList.innerHTML = '';
+    }
+  }
+  for (let x = 0; x < data.entries.length; x++) {
+    var render = renderEntries(data.entries[x]);
+    $unorderedList.appendChild(render);
+    $entryForm.reset();
+    $userPhoto.src = 'images/placeholder-image-square.jpg';
+    $deleteLink.classList.add('hidden');
+    data.editing = null;
+  }
+});
