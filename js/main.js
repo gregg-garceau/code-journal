@@ -8,6 +8,7 @@ var $entriesNav = document.querySelector('h3.journal-header');
 var $newButton = document.querySelector('.new-entry');
 var $unorderedList = document.querySelector('.entries-list');
 var $deleteLink = document.querySelector('.delete');
+var $newEdit = document.querySelector('.new-edit');
 
 $urlInput.addEventListener('input', function (event) {
   var imageUrl = $urlInput.value;
@@ -93,6 +94,7 @@ $entryForm.addEventListener('submit', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
+  $newEdit.innerHTML = 'New Entry';
 });
 
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   $unorderedList.addEventListener('click', function (event) {
     if (event.target.getAttribute('data-entry-id')) {
+      $newEdit.innerHTML = 'Edit Entry';
       $deleteLink.classList.remove('hidden');
       $dataViewEntries.className = 'hidden';
       $dataViewForm.className = 'view';
@@ -127,12 +130,14 @@ $entriesNav.addEventListener('click', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
+  $newEdit.innerHTML = 'New Entry';
   $entryForm.reset();
   $userPhoto.src = 'images/placeholder-image-square.jpg';
 });
 
 $newButton.addEventListener('click', function (event) {
   $dataViewEntries.className = 'hidden';
+  $newEdit.innerHTML = 'New Entry';
   $dataViewForm.className = 'view';
   data.view = 'entry-form';
 });
