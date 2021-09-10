@@ -61,11 +61,6 @@ button {
   margin-right: 1rem;
 }
 
-.flex-end {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .margin-top-zero {
   margin-top: 0;
   display: flex;
@@ -80,4 +75,63 @@ button {
 
 .fas {
   color: rgb(85, 43, 129);
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.modal-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.787);
+}
+
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.margin-left {
+  margin-left: 2rem;
+}
+
+.cancel-button {
+  background-color: silver;
+  color: black;
+}
+
+.confirm-button {
+  background-color: crimson;
+  color: white;
+}
+
+button.absolute {
+  bottom: -20px;
+  right: 10px;
+}
+
+a.absolute {
+  left: 10px;
+  bottom: -10px;
 }
