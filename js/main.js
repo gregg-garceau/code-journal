@@ -9,6 +9,7 @@ var $newButton = document.querySelector('.new-entry');
 var $unorderedList = document.querySelector('.entries-list');
 var $deleteLink = document.querySelector('.delete');
 var $newEdit = document.querySelector('.new-edit');
+var $searchBar = document.querySelector('.search');
 
 $urlInput.addEventListener('input', function (event) {
   var imageUrl = $urlInput.value;
@@ -91,6 +92,7 @@ $entryForm.addEventListener('submit', function (event) {
   }
   data.editing = null;
   $deleteLink.classList.add('hidden');
+  $searchBar.classList.remove('hidden');
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
   data.view = 'entries';
@@ -109,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
       $deleteLink.classList.remove('hidden');
       $dataViewEntries.className = 'hidden';
       $dataViewForm.className = 'view';
+      $searchBar.classList.add('hidden');
       var iconTarget = event.target.getAttribute('data-entry-id');
       iconTarget = parseInt(iconTarget);
       for (let b = 0; b < data.entries.length; b++) {
@@ -129,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 $entriesNav.addEventListener('click', function (event) {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
+  $searchBar.classList.remove('hidden');
   data.view = 'entries';
   $newEdit.innerHTML = 'New Entry';
   $entryForm.reset();
@@ -139,15 +143,18 @@ $newButton.addEventListener('click', function (event) {
   $dataViewEntries.className = 'hidden';
   $newEdit.innerHTML = 'New Entry';
   $dataViewForm.className = 'view';
+  $searchBar.classList.add('hidden');
   data.view = 'entry-form';
 });
 
 if (data.view === 'entry-form') {
   $dataViewEntries.className = 'hidden';
   $dataViewForm.className = 'view';
+  $searchBar.classList.add('hidden');
 } else if (data.view === 'entries') {
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
+  $searchBar.classList.remove('hidden');
 }
 
 var $modalBox = document.querySelector('.modal-box');
@@ -164,9 +171,11 @@ $cancelButton.addEventListener('click', function (event) {
 
 $confirmButton.addEventListener('click', function (event) {
   $modalBox.classList.add('hidden');
+  $searchBar.classList.remove('hidden');
   data.view = 'entries';
   $dataViewEntries.className = 'view';
   $dataViewForm.className = 'hidden';
+  $newEdit.innerHTML = 'New Entry';
   var deleteId = data.editing.entryId;
   for (let y = 0; y < data.entries.length; y++) {
     if (data.entries[y].entryId === deleteId) {
